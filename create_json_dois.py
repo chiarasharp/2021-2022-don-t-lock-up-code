@@ -38,6 +38,9 @@ print("number of journals: "+str(len(journals)))
 #                   "issnj2+eissnj2":{"title":title2, "issn":issnj2, "eissn":eissnj2, "dois:["doi1", "doi2",...]"}
 doi_json = {}
 
+#Initializing the set that will contain all of the articles dois
+articles=set()
+
 # Storing the articles that don't have a doi and have been wrongly registered
 art_without_doi= []
 
@@ -76,6 +79,8 @@ for tarinfo in tar:
         if art_doi=="":
             art_without_doi.append(article)
         else:
+            articles.add(art_doi)
+
             # Collecting the title of the journal
             journal_title=article["bibjson"]["journal"]["title"]
 
@@ -110,7 +115,7 @@ for tarinfo in tar:
 
 print("number of journals that have articles with dois: "+str(len(doi_json)))
 print("number of articles that don't have a doi: "+str(len(art_without_doi)))
-print("total number of articles processed: "+str(num_art))
+print("total number of articles processed: "+str(num_art)+". According to the set of articles:"+str(len(articles)))
 
 # Save a json file with all journals and DOIs
 with open('doi.json', 'w', encoding='utf8') as json_file:
@@ -119,3 +124,6 @@ with open('doi.json', 'w', encoding='utf8') as json_file:
 # Save a json file with the articles that don't have a DOI
 with open('articles_without_doi.json', 'w', encoding='utf-8') as json_file2:
     json.dump(art_without_doi, json_file2, ensure_ascii=False)
+
+with open('all_dois.json', 'w', encoding="utf-8") as json_file3:
+    json.dump(articles, json_file3, ensure_ascii=False)
