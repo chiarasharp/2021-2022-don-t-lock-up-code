@@ -1,7 +1,6 @@
 import tarfile
 import json
 
-
 def main():
     # Initializing the set that will contain all of the journals 'issn+eissn'
     journals=set()
@@ -39,9 +38,6 @@ def main():
     # It is of the form {"issnj1+eissnj1":{"title":title1, "issn":issnj1, "eissn":eissnj1, "dois:["doi1", "doi2",...]"},
     #                   "issnj2+eissnj2":{"title":title2, "issn":issnj2, "eissn":eissnj2, "dois:["doi1", "doi2",...]"}
     doi_json = {}
-
-    #Initializing the set that will contain all of the articles dois
-    articles=set()
 
     # Storing the articles that don't have a doi and have been wrongly registered
     art_without_doi= []
@@ -81,7 +77,6 @@ def main():
             if art_doi=="":
                 art_without_doi.append(article)
             else:
-                articles.add(art_doi)
 
                 # Collecting the title of the journal
                 journal_title=article["bibjson"]["journal"]["title"]
@@ -117,7 +112,7 @@ def main():
 
     print("number of journals that have articles with dois: "+str(len(doi_json)))
     print("number of articles that don't have a doi: "+str(len(art_without_doi)))
-    print("total number of articles processed: "+str(num_art)+". According to the set of articles:"+str(len(articles)))
+    print("total number of articles processed: "+str(num_art))
 
     # Save a json file with all journals and DOIs
     with open('./data/queried/DOAJ/doi.json', 'w', encoding='utf8') as json_file:
@@ -126,6 +121,3 @@ def main():
     # Save a json file with the articles that don't have a DOI
     with open('./data/queried/DOAJ/articles_without_doi.json', 'w', encoding='utf-8') as json_file2:
         json.dump(art_without_doi, json_file2, ensure_ascii=False)
-
-    with open('./data/queried/DOAJ/all_dois.json', 'w', encoding="utf-8") as json_file3:
-        json.dump(articles, json_file3, ensure_ascii=False)
