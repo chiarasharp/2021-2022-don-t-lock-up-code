@@ -1,5 +1,6 @@
 from src.create_json_dois import main as doaj_json
 from src.manage_csv_files import main as csv_files
+from src.set_dois import main as take_all_dois
 
 
 
@@ -9,4 +10,5 @@ from src.manage_csv_files import main as csv_files
 
 if __name__ == "__main__":
 
-    csv_files()
+
+    take_all_dois()
