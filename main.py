@@ -2,6 +2,7 @@ from src.create_json_dois import main as doaj_json
 from src.manage_csv_files import main as csv_files
 from src.set_dois import main as take_all_dois
 from src.reorganize_json import main as reorganize_json, reorganize_json_doi_DOAJ
+from src.set_dois import main as set_dois
 import os
 import pickle
 import pandas as pd
@@ -31,10 +32,12 @@ if __name__ == "__main__":
 
 
 
-    with open("data/queried/DOAJ/reorganize_doi.json", encoding="utf-8") as f:
-        data = json.load(f)
 
-    reorganize_json(data)
+
+with open('./data/queried/DOAJ/doi_articles_journals.pickle', 'rb') as pickle_file:
+    data_json = pickle.load(pickle_file)
+
+csv_files(data_json)
 
 
 
