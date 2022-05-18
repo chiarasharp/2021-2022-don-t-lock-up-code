@@ -1,16 +1,18 @@
 import json
 import pickle
+import pandas as pd
 
 
 def main():
-    all_dois=[]
+    all_dois={}
 
-    with open('./data/queried/DOAJ/doi.json', 'r', encoding="utf-8") as json_file:
+    with open(".\data\queried\DOAJ\doi.json", 'r', encoding="utf-8") as json_file:
+        print("hello")
         p = json.load(json_file)
 
         for i in p:
-            all_dois.extend(p[i]["dois"])
-    all_dois_set = set(all_dois)
+            for doi in p[i]["dois"]:
+                all_dois[doi]=i
 
-    with open('./data/queried/DOAJ/doi_articles.pickle', 'wb') as pickle_file:
-        pickle.dump(all_dois_set, pickle_file, protocol=pickle.HIGHEST_PROTOCOL)
+    with open('./data/queried/DOAJ/doi_articles_journals.pickle', 'wb') as pickle_file:
+        pickle.dump(all_dois, pickle_file, protocol=pickle.HIGHEST_PROTOCOL)
