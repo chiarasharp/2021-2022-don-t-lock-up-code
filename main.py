@@ -1,6 +1,6 @@
 from src.OC.manage_csv_files import main as manage_csv_files
 from src.DOAJ.create_json_dois import main as create_json_dois
-from src.final_merge import final_merge
+from src.udf.final_merge import final_merge
 from src.DOAJ.set_dois import main as set_dois
 import pickle
 import json
