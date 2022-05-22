@@ -18,6 +18,5 @@ Our experiment was made on a machine with this hardware configurations:
 * [The Data Management Plan](https://doi.org/10.5281/zenodo.6417367)
 * [The Protocol]()
 * [The Article]()
-* [The Site](https://open-sci.github.io/2021-2022-don-t-lock-up-code/)
 * [The Results]()
 * [The Sister Research](https://github.com/open-sci/2021-2022-la-chouffe-code)
