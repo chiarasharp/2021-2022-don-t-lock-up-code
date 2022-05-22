@@ -3,13 +3,13 @@ from glob import glob
 import os
 from datetime import datetime as dt
 
-all_files = glob(os.path.join("E:/open_cit", "*.json"))
+all_files = glob(os.path.join("./data/queried/OC/open_cit", "*.json"))
 list_errors = list()
 total_length = 0
 for file in all_files:
     # print(list_errors)
     with open(file, "r") as json_file:
-        print(file)
+        #print(file)
         data = json.load(json_file)
         total_length += len(data)
 
@@ -32,5 +32,3 @@ for file in all_files:
                         # print(record)
                         list_errors.append(record)
 print(f"{len(list_errors)}/{total_length}")
-
-
