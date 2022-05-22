@@ -1,10 +1,10 @@
 import pandas as pd
 import plotly.express as px
 
-full_df = pd.read_json('data\queried\doi_with_count_second_version.json', orient="index").convert_dtypes()
+full_df = pd.read_json('../../data/final_data/doi_with_count_second_version.json', orient="index").convert_dtypes()
 full_df['dois']=full_df['dois'].apply(lambda x: len(x))
 
-open_cit_df = pd.read_json('data/final_data/open_cit_in_years.json')
+open_cit_df = pd.read_json('../../data/final_data/open_cit_in_years.json')
 
 #General information about number of citations and references. The open_cited and open_citing numbers are the same, as expected, since our study is about citations inside the same dataset
 print(full_df[['cited', 'citing', 'open_cited', 'open_citing']].sum(axis=0))
@@ -60,17 +60,17 @@ sorted_by_open_cited_with_num_dois.show()
 
 
 # plotting the timeline of citations going and coming to open journals
-open_cit_fig = px.bar(df, x='year', y='citation_count',
+open_cit_fig = px.bar(open_cit_df, x='year', y='citation_count',
                       color='citation_count', 
                       height=600,
-                      title='Timeline of citations coming and goind to open journals')
+                      title='Timeline of open citations of DOAJ journals')
 open_cit_fig.update_xaxes(rangeslider_visible=True)
 open_cit_fig.show()
 
 # plotting the timeline of citations going and coming to open journals in the last 20 years
-open_cit_20_fig = px.bar(df.tail(20), x='year', y='citation_count', 
+open_cit_20_fig = px.bar(open_cit_df.tail(20), x='year', y='citation_count', 
              hover_data=['citation_count'],
-             title='Timeline of citations coming and goind to open journals in the last 20 years', 
+             title='Timeline of open citations of DOAJ journals in the last 20 years', 
              color='citation_count', 
              height=600)
 open_cit_20_fig.show()
