@@ -1,6 +1,7 @@
 from src.OC.manage_csv_files import main as manage_csv_files
 from src.DOAJ.create_json_dois import main as create_json_dois
 from src.udf.final_merge import final_merge
+from src.udf.group_open_cit import main as group_open_cit
 from src.DOAJ.set_dois import main as set_dois
 import pickle
 import json
@@ -14,9 +15,10 @@ if __name__ == "__main__":
 
     '''1.------------DOAJ------------'''
 
-    path_to_DOAJ_zip = "./data/imported/doaj_journal_data_2022-05-07.tar.gz"
+    path_to_DOAJ_journ_zip = "./data/imported/doaj_journal_data_2022-05-07.tar.gz"
+    path_to_DOAJ_art_zip = " " # to add where your dump is
 
-    create_json_dois(path_to_DOAJ_zip)
+    create_json_dois(path_to_DOAJ_journ_zip, path_to_DOAJ_art_zip)
 
     path_to_dois_file = "data/queried/DOAJ/doi.json"
 
@@ -43,7 +45,13 @@ if __name__ == "__main__":
 
     data = final_merge(all_doi, general_count_dict)
 
+   
+
     with open('data/doi_with_count_second_version.json', 'w', encoding='utf8') as json_file:
         json.dump(data, json_file, ensure_ascii=False)
+
+
+    '''4.------------Grouping and counting open cit part------------'''
+    group_open_cit()
 
 

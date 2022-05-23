@@ -1,4 +1,10 @@
-1. Esporre i path dell'output dei file nel create_json_dois.py
 
 2. Aggiungere nel main la parte delle funzioni per i file "garbage" (file che contengono record che hanno delle
 anomalie)
+
+3. change from 7z to zip
+
+4. push the doi with error zip in doaj folder
+
+5. change doi_with_count and zip and push final_data
+
