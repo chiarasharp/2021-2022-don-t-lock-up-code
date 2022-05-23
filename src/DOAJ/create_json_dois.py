@@ -2,7 +2,7 @@ import tarfile
 import json
 
 
-def main(path_to_DOAJ_journ_zip, path_to_DOAJ_art_zip):
+def create_json_dois(path_to_DOAJ_journ_zip, path_to_DOAJ_art_zip):
     # Initializing the set that will contain all of the journals 'issn+eissn'
     journals = set()
 
