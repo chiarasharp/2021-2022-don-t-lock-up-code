@@ -4,13 +4,13 @@ This is the repository for the software of the research "Coverage of DOAJ journa
 ## Reproduce Our Experiment
 Run this command:
 ```bash
-python blabla.py
+python -m main.py
 ```
 ## Hardware Configurations
 Our experiment was made on a machine with this hardware configurations:
-* CPU:
-* RAM:
-* Storage:
+* CPU: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz   2.59 GHz
+* RAM: 20,0 GB (19,9 GB usable)
+* Storage: 200 GB
 
 
 ## Other Useful Things
