@@ -38,20 +38,18 @@ if __name__ == "__main__":
     '''3.------------Merge part------------'''
 
     all_doi_path = "./data/queried/DOAJ/doi.json"
-    general_count_dict = "./data/queried/OC/general_count_dict_second_version.json"
+    general_count_dict = "./data/queried/OC/general_count_dict.json"
 
     all_doi = json.load(open(all_doi_path, encoding="utf-8"))
     general_count_dict = json.load(open(general_count_dict))
 
     data = final_merge(all_doi, general_count_dict)
 
-   
 
-    with open('data/doi_with_count_second_version.json', 'w', encoding='utf8') as json_file:
+
+    with open('data/doi_with_count.json', 'w', encoding='utf8') as json_file:
         json.dump(data, json_file, ensure_ascii=False)
 
 
     '''4.------------Grouping and counting open cit part------------'''
     group_open_cit()
-
-
