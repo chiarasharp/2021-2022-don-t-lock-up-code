@@ -17,7 +17,7 @@ def main():
 
     # getting the citations with errors in dates and putting them in a file 
     df2 = df[(df['year'] > 2024) | (df['year'].isnull())]
-    df2.to_json('open_cit_w_date_err.json', orient="records")
+    df2.to_json('.data/final_data/open_cit_w_date_err.json', orient="records")
 
     print("number of citations with errors: " + str(len(df2)) + ". citations with errors file created.")
 
@@ -31,6 +31,4 @@ def main():
     print("grouping and counting done.")
 
     # dumping in a json
-    df.to_json('open_cit_in_years.json', orient="records")
-
-main()
+    df.to_json('.data/final_data/open_cit_in_years.json', orient="records")

@@ -2,17 +2,17 @@ import tarfile
 import json
 
 
-def main(path_to_DOAJ_zip):
+def main(path_to_DOAJ_journ_zip, path_to_DOAJ_art_zip):
     # Initializing the set that will contain all of the journals 'issn+eissn'
     journals = set()
 
     # Extracting data from the DOAJ journals dump (May 7th, 2022)
-    tar_journals = tarfile.open(path_to_DOAJ_zip, "r:gz")
+    tar_journals = tarfile.open(path_to_DOAJ_journ_zip, "r:gz")
     for tarinfo in tar_journals:
 
-        ciao = tar_journals.extractfile(tarinfo)
+        zip_file = tar_journals.extractfile(tarinfo)
         # Extracting the data in json format
-        p = json.load(ciao)
+        p = json.load(zip_file)
 
         for journal in p:
             # For every journal, extract only the info about issn and eissn. Through some tests, we verified that
@@ -47,12 +47,12 @@ def main(path_to_DOAJ_zip):
     # Counting all of the articles
     num_art = 0
     # Extracting data from the DOAJ articles dump (May 1st, 2022)
-    tar = tarfile.open("./data/imported/doaj_article_data_2022-05-01.tar.gz", "r:gz")
+    tar = tarfile.open(path_to_DOAJ_art_zip, "r:gz")
     for tarinfo in tar:
 
-        ciao = tar.extractfile(tarinfo)
+        z_file = tar.extractfile(tarinfo)
         # Extracting the data in json format
-        p = json.load(ciao)
+        p = json.load(z_file)
         for article in p:
             num_art += 1
             # Initializing the variables as empty strings for each iteration
