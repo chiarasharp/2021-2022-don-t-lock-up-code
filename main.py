@@ -1,13 +1,10 @@
 from src.OC.manage_csv_files import main as manage_csv_files
 from src.DOAJ.create_json_dois import main as create_json_dois
 from src.udf.final_merge import final_merge
-from src.udf.group_open_cit import main as group_open_cit
+from src.udf.group_open_cit import group_open_cit
 from src.DOAJ.set_dois import main as set_dois
 import pickle
 import json
-
-
-
 
 
 if __name__ == "__main__":
@@ -52,4 +49,8 @@ if __name__ == "__main__":
 
 
     '''4.------------Grouping and counting open cit part------------'''
-    group_open_cit()
+
+    path_to_open_cit_folder = ".data/queried/OC/open_cit"
+    output_path_open_cit_years_json = ".data/final_data/open_cit_in_years.json"
+    output_path_open_cit_err_json = ".data/final_data/open_cit_w_date_err.json"
+    group_open_cit(path_to_open_cit_folder, output_path_open_cit_years_json, output_path_open_cit_err_json)

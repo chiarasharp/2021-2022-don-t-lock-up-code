@@ -2,9 +2,9 @@ import os
 import pandas as pd
 from glob import glob
 
-def main():
+def group_open_cit(path_to_open_cit_folder, output_path_open_cit_years_json, output_path_open_cit_err_json):
     # getting the json files with the citations
-    all_files = glob(os.path.join("data/queried/OC/open_cit", "*.json"))
+    all_files = glob(os.path.join(path_to_open_cit_folder, "*.json"))
     ind_df = (pd.read_json(f) for f in all_files)
 
     # converting them in a pandas dataframe
@@ -17,7 +17,7 @@ def main():
 
     # getting the citations with errors in dates and putting them in a file 
     df2 = df[(df['year'] > 2024) | (df['year'].isnull())]
-    df2.to_json('.data/final_data/open_cit_w_date_err.json', orient="records")
+    df2.to_json(output_path_open_cit_err_json, orient="records")
 
     print("number of citations with errors: " + str(len(df2)) + ". citations with errors file created.")
 
@@ -31,4 +31,4 @@ def main():
     print("grouping and counting done.")
 
     # dumping in a json
-    df.to_json('.data/final_data/open_cit_in_years.json', orient="records")
+    df.to_json(output_path_open_cit_years_json, orient="records")
