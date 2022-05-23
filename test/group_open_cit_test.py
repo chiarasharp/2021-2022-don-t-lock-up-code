@@ -1,9 +1,9 @@
 import os
 import unittest
 import json
-
+import sys
+sys.path.append('src')
 from src.udf.group_open_cit import group_open_cit
-
 
 class GroupOpenCitTestCase(unittest.TestCase):
 
