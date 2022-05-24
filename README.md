@@ -16,7 +16,7 @@ Our experiment was made on a machine with this hardware configurations:
 ## Other Useful Things
 
 * [The Data Management Plan](https://doi.org/10.5281/zenodo.6417367)
-* [The Protocol]()
-* [The Article]()
-* [The Results]()
+* [The Protocol](https://dx.doi.org/10.17504/protocols.io.n92ldz598v5b/v4)
+* [The Article](https://doi.org/10.5281/zenodo.6574741)
+* [The Results](https://doi.org/10.5281/zenodo.6573890)
 * [The Sister Research](https://github.com/open-sci/2021-2022-la-chouffe-code)
