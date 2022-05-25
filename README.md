@@ -20,3 +20,4 @@ Our experiment was made on a machine with this hardware configurations:
 * [The Article](https://doi.org/10.5281/zenodo.6574741)
 * [The Results](https://doi.org/10.5281/zenodo.6573890)
 * [The Sister Research](https://github.com/open-sci/2021-2022-la-chouffe-code)
+* [The Presentation](https://doi.org/10.5281/zenodo.6579115)
