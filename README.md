@@ -1,4 +1,6 @@
 # Coverage of DOAJ journals' citations through OpenCitations
+[![DOI](https://zenodo.org/badge/486368166.svg)](https://zenodo.org/badge/latestdoi/486368166)
+
 This is the repository for the software of the research "Coverage of DOAJ journals' citations through OpenCitations" made in the context of the Open Science course of 21/22 of University of Bologna held by professor Silvio Peroni.
 
 ## Reproduce Our Experiment
