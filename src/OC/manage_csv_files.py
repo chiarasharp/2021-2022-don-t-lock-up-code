@@ -6,7 +6,7 @@ from os import listdir
 
 
 def main(data_json, input_path_zip_file, output_file_path_general_dict, output_file_path_open_cit_json):
-    list_zip_file = [f for f in listdir(input_path_zip_file)]
+    list_zip_file = [f for f in listdir(input_path_zip_file) if "gitignore" not in f]
     general_count_dict = dict()
     # iterate all over zip file
     for zip_file in list_zip_file:
@@ -26,6 +26,7 @@ def main(data_json, input_path_zip_file, output_file_path_general_dict, output_f
                 my_dfs = {"cited": df[df["cited"].isin(data_json.keys())],
                           "citing": df[df["citing"].isin(data_json.keys())],
                           "open_cit": df[(df["cited"].isin(data_json.keys())) & (df["citing"].isin(data_json.keys()))]}
+
 
                 for name_df, df in my_dfs.items():
                     if name_df == 'cited':
@@ -82,6 +83,7 @@ def main(data_json, input_path_zip_file, output_file_path_general_dict, output_f
                         general_count_dict = counter_function(df_count.to_dict(orient="records"), general_count_dict,
                                                               "open_citing")
 
+
                         # we save for each iteration the df filtered by DOAJ dois on both columns (cited and citing)
                         # in a json format
                         result = df.to_dict(orient="records")
@@ -92,7 +94,7 @@ def main(data_json, input_path_zip_file, output_file_path_general_dict, output_f
                             outfile.close()
 
                     # we save for each iteration the the general dict
-                    with open(f"{output_file_path_general_dict}/general_count_dict_prova.json",
+                    with open(f"{output_file_path_general_dict}/general_count_dict.json",
                               "w") as outfile:
                         json_object = json.dumps(general_count_dict)
                         outfile.write(json_object)
