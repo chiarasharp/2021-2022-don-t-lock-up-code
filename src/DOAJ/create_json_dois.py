@@ -60,6 +60,7 @@ def create_json_dois(path_to_DOAJ_journ_zip, path_to_DOAJ_art_zip):
             journal_eissn = ""
             art_doi = ""
             key_dict = ""
+            journal_subject = ""
 
             # Collecting data for issn, eissn and doi for each article
             for el in article["bibjson"]["identifier"]:
@@ -108,13 +109,14 @@ def create_json_dois(path_to_DOAJ_journ_zip, path_to_DOAJ_art_zip):
                                 key_dict = issn
                                 break
 
+                journal_subject = article["bibjson"]["subject"]
                 # Once all of the information are collected, we add them to our final json, adding a new key if it
                 # doesn't exist or adding it to the list of dois for the journal
                 if key_dict in doi_json:
                     doi_json[key_dict]["dois"].append(art_doi)
                 else:
                     doi_json[key_dict] = {"title": journal_title, "pissn": journal_issn, "eissn": journal_eissn,
-                                          "dois": [art_doi]}
+                                          "dois": [art_doi], "subject": journal_subject}
 
     print("number of journals that have articles with dois: " + str(len(doi_json)))
     print("number of articles that don't have a doi: " + str(len(art_without_doi)))
