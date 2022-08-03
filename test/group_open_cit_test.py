@@ -3,7 +3,7 @@ import unittest
 import json
 import sys
 sys.path.append('src')
-from src.udf.group_open_cit import group_open_cit
+from udf.group_cit_by_years import group_open_cit
 
 class GroupOpenCitTestCase(unittest.TestCase):
 

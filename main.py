@@ -1,7 +1,7 @@
 from src.OC.manage_csv_files import main as manage_csv_files
 from src.DOAJ.create_json_dois import create_json_dois
 from src.udf.final_merge import final_merge
-from src.udf.group_open_cit import group_open_cit
+from udf.group_cit_by_years import group_fromto_DOAJ_cit_by_years, group_cit_by_years
 from src.DOAJ.set_dois import main as set_dois
 import pickle
 import json
@@ -50,7 +50,18 @@ if __name__ == "__main__":
 
     '''4.------------Grouping and counting open cit part------------'''
 
-    path_to_open_cit_folder = ".data/queried/OC/open_cit"
-    output_path_open_cit_years_json = ".data/final_data/open_cit_in_years.json"
-    output_path_open_cit_err_json = ".data/final_data/open_cit_w_date_err.json"
-    group_open_cit(path_to_open_cit_folder, output_path_open_cit_years_json, output_path_open_cit_err_json)
+    #TODO correct all the paths
+
+    path_to_cit_folder = "" 
+    output_path_cit_years_json = ""
+    output_path_date_null_gen_json = ".data/errors/null_date_gen_cit.json"
+    output_path_date_wrong_gen_json = ".data/errors/wrong_date_gen_cit.json"
+    group_cit_by_years(path_to_cit_folder, output_path_cit_years_json, output_path_date_null_gen_json, output_path_date_wrong_gen_json)
+
+    path_to_fromto_DOAJ_cit_folder = ""
+    path_cit_years_json = ""
+    output_path_date_null_tofromDOAJ_json = ".data/errors/null_date_tofromDOAJ_cit.json"
+    output_path_date_wrong_tofromDOAJ_json = ".data/errors/wrong_date_tofromDOAJ_cit.json"
+    group_fromto_DOAJ_cit_by_years(path_to_fromto_DOAJ_cit_folder, output_path_cit_years_json, output_path_date_null_tofromDOAJ_json, output_path_date_wrong_tofromDOAJ_json)
+
+    
