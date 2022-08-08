@@ -2,9 +2,12 @@ from src.OC.manage_csv_files import main as manage_csv_files
 from src.DOAJ.create_json_dois import create_json_dois
 from src.udf.final_merge import final_merge
 from udf.group_cit_by_years import group_fromto_DOAJ_cit_by_years, group_cit_by_years
+from udf.manage_errors import manage_errors
 from src.DOAJ.set_dois import main as set_dois
 import pickle
 import json
+
+
 
 
 if __name__ == "__main__":
@@ -50,18 +53,20 @@ if __name__ == "__main__":
 
     '''4.------------Grouping and counting open cit part------------'''
 
-    #TODO correct all the paths
+    #TODO CHOOSE AND CORRECT THE PATHS
 
     path_to_cit_folder = "" 
     output_path_cit_years_json = ""
-    output_path_date_null_gen_json = ".data/errors/null_date_gen_cit.json"
-    output_path_date_wrong_gen_json = ".data/errors/wrong_date_gen_cit.json"
+    output_path_date_null_gen_json = ".data/errors/null_date_gen_cit.json" #do not change this path
+    output_path_date_wrong_gen_json = ".data/errors/wrong_date_gen_cit.json" #do not change this path
     group_cit_by_years(path_to_cit_folder, output_path_cit_years_json, output_path_date_null_gen_json, output_path_date_wrong_gen_json)
 
     path_to_fromto_DOAJ_cit_folder = ""
     path_cit_years_json = ""
-    output_path_date_null_tofromDOAJ_json = ".data/errors/null_date_tofromDOAJ_cit.json"
-    output_path_date_wrong_tofromDOAJ_json = ".data/errors/wrong_date_tofromDOAJ_cit.json"
+    output_path_date_null_tofromDOAJ_json = ".data/errors/null_date_tofromDOAJ_cit.json" #do not change this path
+    output_path_date_wrong_tofromDOAJ_json = ".data/errors/wrong_date_tofromDOAJ_cit.json" #do not change this path
     group_fromto_DOAJ_cit_by_years(path_to_fromto_DOAJ_cit_folder, output_path_cit_years_json, output_path_date_null_tofromDOAJ_json, output_path_date_wrong_tofromDOAJ_json)
 
-    
+    path_to_err_folder = ".data/errors" #do not change this path
+    output_err_categories_json = ".data/final_data/errors.json"
+    manage_errors(path_to_err_folder, output_err_categories_json)
