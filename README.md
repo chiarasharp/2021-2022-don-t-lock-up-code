@@ -14,6 +14,10 @@ Our experiment was made on a machine with this hardware configurations:
 * RAM: 20,0 GB (19,9 GB usable)
 * Storage: 200 GB
 
+## Source datasets
+* [DOAJ public articles data dump](https://doaj.org/public-data-dump/article) (May 01, 2022)
+* [DOAJ public journals data dump](https://doaj.org/public-data-dump/journal) (May 07, 2022)
+* [OpenCitations COCI dump](https://opencitations.net/download#coci) (March 2022)
 
 ## Other Useful Things
 
