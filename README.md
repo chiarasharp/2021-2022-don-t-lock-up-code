@@ -6,7 +6,7 @@ This is the repository for the software of the research "Coverage of DOAJ journa
 ## Reproduce Our Experiment
 Run this command:
 ```bash
-python -m main.py
+python -m set_dois_by_journals.py
 ```
 ## Hardware Configurations
 Our experiment was made on a machine with this hardware configurations:
