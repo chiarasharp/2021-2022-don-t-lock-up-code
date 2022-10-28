@@ -127,5 +127,5 @@ def create_json_dois(path_to_DOAJ_journ_zip, path_to_DOAJ_art_zip):
         json.dump(doi_json, json_file, ensure_ascii=False)
 
     # Save a json file with the articles that don't have a DOI
-    with open('./data/queried/DOAJ/articles_without_doi.json', 'w', encoding='utf-8') as json_file2:
+    with open('./data/error/articles_without_doi.json', 'w', encoding='utf-8') as json_file2:
         json.dump(art_without_doi, json_file2, ensure_ascii=False)
