@@ -11,12 +11,12 @@ def manage_errors(path_to_err_folder, output_err_categories_json):
     all_files = glob(os.path.join(path_to_err_folder, "*.json"))
 
     for f in all_files:
-        # getting the titles of the files
+        #  getting the titles of the files
         titles.append(f[7:-5])
         with open(f) as inf:
             j = json.load(inf)
 
-            # counting the elements inside the files
+            #  counting the elements inside the files
             count.append(len(j))
 
     # creating a dictionary of the count of each category of errors and dumping it in a json
