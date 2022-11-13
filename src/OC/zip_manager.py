@@ -32,6 +32,7 @@ class ZipIterator:
             self.all_files = self.open_zip()
             if self.all_files is None:
                 raise StopIteration
+            print(f'starting iteration...')
             self.file = self.all_files.pop(0)
             self.bar = tqdm(total=len(self.all_files))
             self.bar.update(1)
@@ -44,7 +45,8 @@ class ZipIterator:
     def open_zip(self):
         if len(self.list_zip) > 0:
             dir_zip_name = self.list_zip.pop(0)
-            print(f'starting with another zip dir: {dir_zip_name}')
+            print(f'starting with another zip dir: {dir_zip_name}...')
+            print(f'Extract all zipped csv files in a temporary folder...')
             with zipfile.ZipFile(dir_zip_name, 'r') as zip_ref:
                 zip_ref.extractall(self.output_file)
                 zip_ref.close()

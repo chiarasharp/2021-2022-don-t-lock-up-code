@@ -41,6 +41,8 @@ if __name__ == '__main__':
     | EXECUTION
     |--------------------------------------------------------------------------
     '''
+    print('start adding ratio to the result of previous step...')
+
     # normal (only year, no journal)
 
     normal_json = csv_manager.make_ratio(normal_json)

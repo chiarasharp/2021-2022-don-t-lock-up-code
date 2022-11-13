@@ -41,6 +41,8 @@ if __name__ == '__main__':
     | EXECUTION
     |--------------------------------------------------------------------------
     '''
+    print('start concatenating all results of the previous step...')
+
     # concat normal csv
     df_normal = csv_manager.concat_csv_normal(all_csv_normal)
     # concat by_journal csv

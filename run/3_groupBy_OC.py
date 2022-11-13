@@ -45,7 +45,7 @@ if __name__ == '__main__':
     | EXECUTION
     |--------------------------------------------------------------------------
     '''
-
+    print('start with group by operation of filtered repository')
     for csv in tqdm(all_csv):
         name_file = csv.split('\\')[-1]
 
