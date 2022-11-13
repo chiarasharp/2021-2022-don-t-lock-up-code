@@ -2,3 +2,6 @@ venv
 .idea
 __pycache__
 */*/.ipynb_checkpoints
+my_project.egg-info
+queried
+imported
