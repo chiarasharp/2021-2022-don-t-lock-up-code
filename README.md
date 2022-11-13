@@ -4,10 +4,37 @@
 This is the repository for the software of the research "Coverage of DOAJ journals' citations through OpenCitations" made in the context of the Open Science course of 21/22 of University of Bologna held by professor Silvio Peroni.
 
 ## Reproduce Our Experiment
-Run this command:
+
+
+### 1. Install
+
+install repo with setup.py tools, launching this command:
+
 ```bash
-python -m set_dois_by_journals.py
+pip install setup.py
 ```
+### 2. Run configuration
+
+Then run the _config_ command for generating the .env file, storing all the information about paths, and
+starting the Virtual Environment
+
+```bash
+start-venv
+```
+
+### 3. Run processing steps
+
+Run the program launch the _run_ command. **If you want to run a specific command** comment out
+one or more commands script in the _run.bat_ file
+
+```bash
+run
+```
+
+### 3. Output
+
+You can find the output of the running process inside the output repository specified above.
+
 ## Hardware Configurations
 Our experiment was made on a machine with this hardware configurations:
 * CPU: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz   2.59 GHz
