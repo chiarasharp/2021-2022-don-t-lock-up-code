@@ -2,6 +2,7 @@ from src.OC import csv_manager
 import pandas as pd
 import os
 import json
+from src.udf import read_env
 
 pd.options.mode.chained_assignment = None
 
@@ -20,9 +21,10 @@ if __name__ == '__main__':
     | INPUT VARIABLES
     |--------------------------------------------------------------------------
     '''
+    dict_variable = read_env.take_env_variables('../.env')
 
-    path_to_normal_json = os.path.join('..', os.getenv('output_directory'), 'OC', 'group_by_year', 'normal.json')
-    path_to_by_journal_json = os.path.join('..', os.getenv('output_directory'), 'OC', 'group_by_year',
+    path_to_normal_json = os.path.join('..', dict_variable['output_directory'], 'OC', 'group_by_year', 'normal.json')
+    path_to_by_journal_json = os.path.join('..', dict_variable['output_directory'], 'OC', 'group_by_year',
                                            'by_journal.json')
 
     '''

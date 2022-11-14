@@ -2,6 +2,7 @@ from src.OC import csv_manager
 import pandas as pd
 import os
 from glob import glob
+from src.udf import read_env
 
 pd.options.mode.chained_assignment = None
 
@@ -21,8 +22,10 @@ if __name__ == '__main__':
     |--------------------------------------------------------------------------
     '''
 
-    path_to_I_O_repo = os.path.join('..', os.getenv('output_directory'), 'OC', 'group_by_year')
-    path_to_journals_description_file = os.path.join('..', os.getenv('output_directory'), 'DOAJ', 'doi.json')
+    dict_variable = read_env.take_env_variables('../.env')
+
+    path_to_I_O_repo = os.path.join('..', dict_variable['output_directory'], 'OC', 'group_by_year')
+    path_to_journals_description_file = os.path.join('..', dict_variable['output_directory'], 'DOAJ', 'doi.json')
     all_csv_normal = glob(os.path.join(path_to_I_O_repo, 'normal', '*.csv'))
     all_csv_byJournal = glob(os.path.join(path_to_I_O_repo, 'by_journal', '*.csv'))
     all_csv_null = glob(os.path.join('..', os.getenv('output_directory'), 'errors', 'null', '*.csv'))
@@ -66,6 +69,6 @@ if __name__ == '__main__':
 
     df_by_journal.to_json(os.path.join(path_to_I_O_repo, 'by_journal.json'), orient="records")
 
-    df_null.to_json(os.path.join('..', os.getenv('output_directory'), 'errors', 'null.json'), orient="records")
+    df_null.to_json(os.path.join('..', dict_variable['output_directory'], 'errors', 'null.json'), orient="records")
 
-    df_wrong.to_json(os.path.join('..', os.getenv('output_directory'), 'errors', 'wrong.json'), orient="records")
+    df_wrong.to_json(os.path.join('..', dict_variable['output_directory'], 'errors', 'wrong.json'), orient="records")

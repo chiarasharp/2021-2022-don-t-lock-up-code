@@ -90,24 +90,36 @@ def add_isDOAJ(df):
 '''
 
 
-def discard_errors(df, name_csv):
-    df['file'] = name_csv
+def save_errors(df, name_csv):
+    df['year'] = df['year'].fillna(0)
+    df = df.astype({'year': 'int32'})
 
     # null dates
-    df_null = df[(df['year'].isnull())]
+    df_null = df[df['year'] == 0]
+
+    df_null['file'] = name_csv
+
+    # wrong dates
+    df_wrong = df[(df['year'] != 0) & (df['year'] > 2024)]
+
+    df_wrong['file'] = name_csv
+
+    # discard errors from main dataframe
+    df = discard_errors(df)
+
+    # group by
+    df_wrong = df_wrong[['oci', 'file']].groupby('file', as_index=False).count().reset_index(drop=True)
 
     df_null = df_null[['oci', 'file']].groupby('file', as_index=False).count().reset_index(drop=True)
 
-    # wrong dates
-    df_wrong = df[(df['year'].notnull())]
+    return df, df_null, df_wrong
 
-    df_wrong['year'] = pd.to_numeric(df_wrong['year'])
 
-    df_wrong = df_wrong[(df_wrong['year'] > 2024)]  # wrong dates
+def discard_errors(df):
 
-    df_wrong = df_wrong[['oci', 'file']].groupby('file', as_index=False).count().reset_index(drop=True)
+    df = df[(df['year'] != 0) & (df['year'] <= 2024)]
 
-    return df_null, df_wrong
+    return df
 
 
 '''

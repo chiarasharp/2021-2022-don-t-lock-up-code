@@ -2,6 +2,7 @@ from src.OC import csv_manager
 import pandas as pd
 import os
 from tqdm import tqdm
+from src.udf import read_env
 
 pd.options.mode.chained_assignment = None
 
@@ -21,9 +22,11 @@ if __name__ == '__main__':
     |--------------------------------------------------------------------------
     '''
 
-    path_to_csv = os.path.join('..', os.getenv('output_directory'), 'OC', 'filtered')
+    dict_variable = read_env.take_env_variables('../.env')
 
-    path_to_output = os.path.join('..', os.getenv('output_directory'), 'OC', 'group_by_year')
+    path_to_csv = os.path.join('..', dict_variable['output_directory'], 'OC', 'filtered')
+
+    path_to_output = os.path.join('..', dict_variable['output_directory'], 'OC', 'group_by_year')
 
     '''
     |--------------------------------------------------------------------------
@@ -64,7 +67,7 @@ if __name__ == '__main__':
 
         df = csv_manager.add_year(df)
 
-        df_null, df_wrong = csv_manager.discard_errors(df, name_file)
+        df, df_null, df_wrong = csv_manager.save_errors(df, name_file)
 
         df_normal = csv_manager.groupBy_year(df)
 
@@ -80,6 +83,6 @@ if __name__ == '__main__':
 
         df_by_journal.to_csv(os.path.join(path_to_output, 'by_journal', name_file))
 
-        df_null.to_csv(os.path.join('..', os.getenv('output_directory'), 'errors', 'null', name_file))
+        df_null.to_csv(os.path.join('..', dict_variable['output_directory'], 'errors', 'null', name_file))
 
-        df_wrong.to_csv(os.path.join('..', os.getenv('output_directory'), 'errors', 'wrong', name_file))
+        df_wrong.to_csv(os.path.join('..', dict_variable['output_directory'], 'errors', 'wrong', name_file))

@@ -2,6 +2,8 @@ import pandas as pd
 import pickle
 from src.OC import zip_manager, csv_manager
 import os
+from src.udf import read_env
+
 
 pd.options.mode.chained_assignment = None
 
@@ -25,9 +27,11 @@ if __name__ == '__main__':
     |--------------------------------------------------------------------------
     '''
 
-    path_zip_file = os.path.join('..', os.getenv('input_directory'))
+    dict_variable = read_env.take_env_variables('../.env')
 
-    path_output = os.path.join('..', os.getenv('output_directory'))
+    path_zip_file = os.path.join('..', dict_variable['input_directory'])
+
+    path_output = os.path.join('..', dict_variable['output_directory'])
 
     path_pickle_file = os.path.join(path_output, 'DOAJ/doi_articles_journals.pickle')
 

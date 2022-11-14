@@ -1,13 +1,17 @@
 import os
-import sys
 
-input_directory = sys.argv[1]
 
-with open(sys.argv[1], "r") as f:
-    for line in f.readlines():
-        try:
-            key, value = line.split('=')
-            os.environ[key] = value
-        except ValueError:
-            # syntax error
-            pass
+def take_env_variables(path):
+    dict_variable = dict()
+    with open(path, "r") as f:
+        for line in f.readlines():
+            try:
+                key, value = line.split('=')
+                dict_variable[key] = value.strip()
+
+            except ValueError:
+                # syntax error
+                pass
+
+    return dict_variable
+
