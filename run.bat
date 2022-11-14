@@ -1,9 +1,7 @@
 @echo off
 title OpenCitations-pipeline
 
-python src/udf/read_env.py .env
 cd run
-
 
 :: python -m 1_divide_dois_by_journals_DOAJ
 :: python -m 2_filter_OC

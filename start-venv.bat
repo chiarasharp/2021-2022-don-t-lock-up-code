@@ -11,4 +11,4 @@ echo .env file already exist. If you want to recreate it, delete it
 
 
 echo start the Virtual Environment...
-venv\Scripts\activate
+
