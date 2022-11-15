@@ -5,3 +5,4 @@ __pycache__
 my_project.egg-info
 queried
 imported
+.DS_Store
