@@ -8,6 +8,12 @@ import pandas as pd
 '''
 
 
+def pcent_division(a, b):
+    if b > 0:
+        return round((a / b) * 100, 2)
+    return 0
+
+
 def division(a, b):
     if b > 0:
         return round((a / b) * 100, 2)
@@ -16,19 +22,26 @@ def division(a, b):
 
 def make_ratio_journal(json_file: json):
     for journal in json_file:
-        journal.update({'citing_cited_pcent': division(journal['citing'], journal['cited'])})
-        journal.update({'citations_to_DOAJ_pcent': division(journal['citations_to_DOAJ'], journal['citing'])})
-        journal.update({'cited_by_DOAJ_pcent': division(journal['cited_by_DOAJ'], journal['cited'])})
-        journal.update({'self_citation_pcent': division(journal['self_citation'],
-                                                        (journal['cited'] + journal['citing']))})
+        journal.update({'citing_cited_pcent': pcent_division(journal['citing'], journal['cited'])})
+        journal.update({'citations_to_DOAJ_pcent': pcent_division(journal['citations_to_DOAJ'], journal['citing'])})
+        journal.update({'cited_by_DOAJ_pcent': pcent_division(journal['cited_by_DOAJ'], journal['cited'])})
+        journal.update({'self_citation_pcent': pcent_division(journal['self_citation'],
+                                                              (journal['cited'] + journal['citing']))})
+        journal.update({'citing_cited_ratio': division(journal['citing'], journal['cited'])})
+        journal.update({'citations_to_DOAJ_ratio': division(journal['citations_to_DOAJ'], journal['citing'])})
+        journal.update({'cited_by_DOAJ_ratio': division(journal['cited_by_DOAJ'], journal['cited'])})
+        journal.update({'self_citation_ratio': division(journal['self_citation'],
+                                                              (journal['cited'] + journal['citing']))})
 
     return json_file
 
 
 def make_ratio(json_file: json):
     for year in json_file:
-        year.update({'citing_cited_pcent': division(year['citing'], year['cited'])})
-        year.update({'self_citation_pcent': division(year['self_citation'], (year['citing'] + year['cited']))})
+        year.update({'citing_cited_pcent': pcent_division(year['citing'], year['cited'])})
+        year.update({'self_citation_pcent': pcent_division(year['self_citation'], (year['citing'] + year['cited']))})
+        year.update({'citing_cited_ratio': division(year['citing'], year['cited'])})
+        year.update({'self_citation_ratio': division(year['self_citation'], (year['citing'] + year['cited']))})
 
     return json_file
 
@@ -116,7 +129,6 @@ def save_errors(df, name_csv):
 
 
 def discard_errors(df):
-
     df = df[(df['year'] != 0) & (df['year'] <= 2024)]
 
     return df
