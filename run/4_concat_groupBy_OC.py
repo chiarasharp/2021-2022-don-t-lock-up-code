@@ -28,8 +28,8 @@ if __name__ == '__main__':
     path_to_journals_description_file = os.path.join('..', dict_variable['output_directory'], 'DOAJ', 'doi.json')
     all_csv_normal = glob(os.path.join(path_to_I_O_repo, 'normal', '*.csv'))
     all_csv_byJournal = glob(os.path.join(path_to_I_O_repo, 'by_journal', '*.csv'))
-    all_csv_null = glob(os.path.join('..', os.getenv('output_directory'), 'errors', 'null', '*.csv'))
-    all_csv_wrong = glob(os.path.join('..', os.getenv('output_directory'), 'errors', 'wrong', '*.csv'))
+    all_csv_null = glob(os.path.join('..', dict_variable['output_directory'], 'errors', 'null', '*.csv'))
+    all_csv_wrong = glob(os.path.join('..', dict_variable['output_directory'], 'errors', 'wrong', '*.csv'))
 
     '''
     |--------------------------------------------------------------------------
@@ -59,6 +59,8 @@ if __name__ == '__main__':
 
     df_wrong = csv_manager.concat_csv(all_csv_wrong)
 
+    df_errors = pd.DataFrame({'type_of_error': ['null', 'wrong'], 'count': [sum(df_null['oci']), sum(df_wrong['oci'])]})
+
     '''
     |--------------------------------------------------------------------------
     | SAVE
@@ -72,3 +74,5 @@ if __name__ == '__main__':
     df_null.to_json(os.path.join('..', dict_variable['output_directory'], 'errors', 'null.json'), orient="records")
 
     df_wrong.to_json(os.path.join('..', dict_variable['output_directory'], 'errors', 'wrong.json'), orient="records")
+
+    df_errors.to_json(os.path.join('..', dict_variable['output_directory'], 'errors', 'errors.json'), orient="records")
