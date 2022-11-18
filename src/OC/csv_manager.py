@@ -16,7 +16,7 @@ def pcent_division(a, b):
 
 def division(a, b):
     if b > 0:
-        return round((a / b) * 100, 2)
+        return round((a / b), 2)
     return 0
 
 
@@ -31,7 +31,7 @@ def make_ratio_journal(json_file: json):
         journal.update({'citations_to_DOAJ_ratio': division(journal['citations_to_DOAJ'], journal['citing'])})
         journal.update({'cited_by_DOAJ_ratio': division(journal['cited_by_DOAJ'], journal['cited'])})
         journal.update({'self_citation_ratio': division(journal['self_citation'],
-                                                              (journal['cited'] + journal['citing']))})
+                                                        (journal['cited'] + journal['citing']))})
 
     return json_file
 
@@ -229,10 +229,11 @@ def concat_csv_journal(all_csv):
 
 
 def add_to_journals_DOAJ_descriptions(df, df_journals_description):
-    df_journals_description = df_journals_description.drop('dois', axis=1)
     df_journals_description['journal'] = df_journals_description.index
+    df_journals_description['dois'] = df_journals_description.apply(lambda x: len(x['dois']), axis=1)
     df_journals_description = df_journals_description.reset_index(level=0)
     df_journals_description = df_journals_description.drop('index', axis=1)
+    df_journals_description = df_journals_description.rename({'dois': 'dois_count'}, axis=1)
 
     df_final = df_journals_description.merge(df, on='journal')
 
