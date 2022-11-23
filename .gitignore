@@ -3,6 +3,14 @@ venv
 __pycache__
 */*/.ipynb_checkpoints
 my_project.egg-info
-queried
+normal
+by_journal
+filtered
 imported
+null
+wrong
+tmp
 .DS_Store
+errors
+DOAJ
+.env
