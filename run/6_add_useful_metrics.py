@@ -27,7 +27,8 @@ if __name__ == '__main__':
     path_to_DOAJ_metrics = os.path.join('..', dict_variable['output_directory'], 'DOAJ', 'metrics.json')
     path_to_DOAJ_total_dois = os.path.join('..', dict_variable['output_directory'], 'DOAJ',
                                            'doi_articles_journals.pickle')
-    path_to_output_file = os.path.join('..', dict_variable['output_directory'], 'DOAJ', 'DOAJ_metrics')
+    path_to_final_output_repo = os.path.join('..', dict_variable['output_directory'], 'final_output')
+
 
     '''
     |--------------------------------------------------------------------------
@@ -69,13 +70,11 @@ if __name__ == '__main__':
     DOAJ_metrics['total_dois_repeated'] = sum(list_repeated_dois_count.values())
     DOAJ_metrics['total_dois_accepted'] = len(list_doi_from_dois_json)
 
-    print(DOAJ_metrics)
-
     '''
     |--------------------------------------------------------------------------
     | SAVE
     |--------------------------------------------------------------------------
     '''
 
-    with open(path_to_output_file + '.json', "w") as outfile:
+    with open(os.path.join(path_to_final_output_repo + 'DOAJ_metrics.json'), "w") as outfile:
         json.dump(DOAJ_metrics, outfile)

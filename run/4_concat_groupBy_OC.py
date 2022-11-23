@@ -24,10 +24,11 @@ if __name__ == '__main__':
 
     dict_variable = read_env.take_env_variables('../.env')
 
-    path_to_I_O_repo = os.path.join('..', dict_variable['output_directory'], 'OC', 'group_by_year')
+    path_to_groupBy_files_repo = os.path.join('..', dict_variable['output_directory'], 'OC', 'group_by_year')
+    path_to_final_output_repo = os.path.join('..', dict_variable['output_directory'], 'final_output')
     path_to_journals_description_file = os.path.join('..', dict_variable['output_directory'], 'DOAJ', 'doi.json')
-    all_csv_normal = glob(os.path.join(path_to_I_O_repo, 'normal', '*.csv'))
-    all_csv_byJournal = glob(os.path.join(path_to_I_O_repo, 'by_journal', '*.csv'))
+    all_csv_normal = glob(os.path.join(path_to_groupBy_files_repo, 'normal', '*.csv'))
+    all_csv_byJournal = glob(os.path.join(path_to_groupBy_files_repo, 'by_journal', '*.csv'))
     all_csv_null_dates = glob(os.path.join('..', dict_variable['output_directory'], 'errors', 'null_dates', '*.csv'))
     all_csv_wrong_dates = glob(os.path.join('..', dict_variable['output_directory'], 'errors', 'wrong_dates', '*.csv'))
     all_csv_null_citing = glob(os.path.join('..', dict_variable['output_directory'], 'errors', 'null_citing', '*.csv'))
@@ -82,16 +83,16 @@ if __name__ == '__main__':
     |--------------------------------------------------------------------------
     '''
 
-    df_normal = df_normal.to_json(os.path.join(path_to_I_O_repo, 'normal.json'), orient="records")
+    df_normal = df_normal.to_json(os.path.join(path_to_final_output_repo, 'normal.json'), orient="records")
 
-    df_by_journal.to_json(os.path.join(path_to_I_O_repo, 'by_journal.json'), orient="records")
+    df_by_journal.to_json(os.path.join(path_to_final_output_repo, 'by_journal.json'), orient="records")
 
-    df_null_dates.to_json(os.path.join('..', dict_variable['output_directory'], 'errors', 'null.json'), orient="records")
+    df_null_dates.to_json(os.path.join('..', dict_variable['output_directory'], 'errors', 'null_dates.json'), orient="records")
 
-    df_wrong_dates.to_json(os.path.join('..', dict_variable['output_directory'], 'errors', 'wrong.json'), orient="records")
+    df_wrong_dates.to_json(os.path.join('..', dict_variable['output_directory'], 'errors', 'wrong_dates.json'), orient="records")
 
     df_null_cited.to_json(os.path.join('..', dict_variable['output_directory'], 'errors', 'null_cited.json'), orient="records")
 
     df_null_citing.to_json(os.path.join('..', dict_variable['output_directory'], 'errors', 'null_citing.json'), orient="records")
 
-    df_errors.to_json(os.path.join('..', dict_variable['output_directory'], 'errors', 'errors.json'), orient="records")
+    df_errors.to_json(os.path.join(path_to_final_output_repo, 'errors.json'), orient="records")
