@@ -53,8 +53,10 @@ if __name__ == '__main__':
     | EXECUTION
     |--------------------------------------------------------------------------
     '''
-
-    DOAJ_metrics['total_dois_used'] = len(total_no_repeated_dois)
+    print('\n start adding some useful metrics...')
+    DOAJ_metrics['total_dois_used'] = {'value': len(total_no_repeated_dois), 'description':
+                                        'All dois (with no repetition) which are used for the adding journal operation'
+                                        'in the second pipeline step'}
 
     for article in total_with_repeated_dois.values():
         list_doi_from_dois_json += article['dois']
@@ -67,8 +69,17 @@ if __name__ == '__main__':
         else:
             pass
 
-    DOAJ_metrics['total_dois_repeated'] = sum(list_repeated_dois_count.values())
-    DOAJ_metrics['total_dois_accepted'] = len(list_doi_from_dois_json)
+    DOAJ_metrics["j_with_dois"] = {'value': DOAJ_metrics["j_with_dois"], 'description': 'All journal which have '
+                                                                                        'listed at least one doi'}
+    DOAJ_metrics['total_dois_repeated'] = {'value': sum(list_repeated_dois_count.values()), 'description':
+                                           'All dois which are repeated inside the same or in another journal'}
+    DOAJ_metrics['total_dois_accepted'] = {'value': len(list_doi_from_dois_json), 'description':
+                                           'All articles (with repetition) which have both a defined journal and a '
+                                           'defined doi'}
+    DOAJ_metrics["n_articles_no_dois"] = {'value': DOAJ_metrics["n_articles_no_dois"], 'description':
+                                            'All articles which have no defined dois'}
+    DOAJ_metrics["n_articles_processed"] = {'value': DOAJ_metrics["n_articles_processed"], 'description':
+                                            'All articles which are been processed during the first pipeline step'}
 
     '''
     |--------------------------------------------------------------------------
@@ -76,5 +87,5 @@ if __name__ == '__main__':
     |--------------------------------------------------------------------------
     '''
 
-    with open(os.path.join(path_to_final_output_repo + 'DOAJ_metrics.json'), "w") as outfile:
+    with open(os.path.join(path_to_final_output_repo, 'DOAJ_metrics.json'), "w") as outfile:
         json.dump(DOAJ_metrics, outfile)
