@@ -65,7 +65,7 @@ if __name__ == '__main__':
 
         df = csv_manager.add_isDOAJ(df)
 
-        df = csv_manager.add_year(df)
+        df = csv_manager.add_year(df, 'creation')
 
         df, df_null, df_wrong = csv_manager.save_errors(df, name_file)
 
@@ -83,6 +83,6 @@ if __name__ == '__main__':
 
         df_by_journal.to_csv(os.path.join(path_to_output, 'by_journal', name_file))
 
-        df_null.to_csv(os.path.join('..', dict_variable['output_directory'], 'errors', 'null', name_file))
+        df_null.to_csv(os.path.join('..', dict_variable['output_directory'], 'errors', 'null_dates', name_file))
 
-        df_wrong.to_csv(os.path.join('..', dict_variable['output_directory'], 'errors', 'wrong', name_file))
+        df_wrong.to_csv(os.path.join('..', dict_variable['output_directory'], 'errors', 'wrong_dates', name_file))
