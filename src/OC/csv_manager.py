@@ -53,6 +53,14 @@ def make_ratio(json_file: json):
 '''
 
 
+def delete_null_values(df, filtering_column):
+    df_null_values = df[df[filtering_column].isnull()]
+
+    df = df[df[filtering_column].notnull()]
+
+    return df, df_null_values
+
+
 def refine(df, selected_columns, filtering_column, filtering_data):
     # select columns
     df = df[selected_columns]
@@ -83,8 +91,8 @@ def add_journal(df, column_selected, journal_data):
     return df
 
 
-def add_year(df):
-    df['year'] = pd.to_datetime(df['creation'], errors='coerce').dt.year
+def add_year(df, name_column):
+    df['year'] = pd.to_datetime(df[name_column], errors='coerce').dt.year
 
     return df
 
