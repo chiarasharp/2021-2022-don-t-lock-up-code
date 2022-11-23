@@ -1,9 +1,9 @@
 import tarfile
 import json
+from tqdm import tqdm
 
 
 def create_json_dois(path_to_DOAJ_journ_zip, path_to_DOAJ_art_zip, path_output_files):
-
     # Initializing the set that will contain all of the journals 'issn+eissn'
     journals = set()
 
@@ -13,7 +13,6 @@ def create_json_dois(path_to_DOAJ_journ_zip, path_to_DOAJ_art_zip, path_output_f
 
         zip_file = tar_journals.extractfile(tarinfo)
         # Extracting the data in json format
-        print(zip_file)
         p = json.load(zip_file)
 
         for journal in p:
@@ -50,10 +49,11 @@ def create_json_dois(path_to_DOAJ_journ_zip, path_to_DOAJ_art_zip, path_output_f
     num_art = 0
     # Extracting data from the DOAJ articles dump (May 1st, 2022)
     tar = tarfile.open(path_to_DOAJ_art_zip, "r:gz")
-    for i, tarinfo in enumerate(tar):
+    bar = tqdm(total=len(list(tar)))
+    for tarinfo in tar:
+        bar.update(1)
 
         z_file = tar.extractfile(tarinfo)
-        print(f"{i}/{len(list(tar))}")
         # Extracting the data in json format
         p = json.load(z_file)
         for article in p:
@@ -83,7 +83,7 @@ def create_json_dois(path_to_DOAJ_journ_zip, path_to_DOAJ_art_zip, path_output_f
             # If the article doesn't have any doi registered, it is added to a list which will be later dumped to a
             # json "articles_without_doi.json"
             if art_doi == "":
-                art_without_doi.append(article)
+                art_without_doi.append({'id': article['id']})
             else:
 
                 # Collecting the title of the journal
@@ -125,6 +125,12 @@ def create_json_dois(path_to_DOAJ_journ_zip, path_to_DOAJ_art_zip, path_output_f
     print("number of articles that don't have a doi: " + str(len(art_without_doi)))
     print("total number of articles processed: " + str(num_art))
 
+    metrics = {'j_with_dois': str(len(doi_json)), 'n_articles_no_dois': str(len(art_without_doi)),
+               'n_articles_processed':  str(num_art)}
+
+    with open(f'{path_output_files}/metrics.json', 'w', encoding='utf8') as json_file:
+        json.dump(metrics, json_file, ensure_ascii=False)
+
     # Save a json file with all journals and DOIs
     with open(f'{path_output_files}/doi.json', 'w', encoding='utf8') as json_file:
         json.dump(doi_json, json_file, ensure_ascii=False)
@@ -132,3 +138,5 @@ def create_json_dois(path_to_DOAJ_journ_zip, path_to_DOAJ_art_zip, path_output_f
     # Save a json file with the articles that don't have a DOI
     with open(f'{path_output_files}/articles_without_doi.json', 'w', encoding='utf-8') as json_file2:
         json.dump(art_without_doi, json_file2, ensure_ascii=False)
+
+    return doi_json
