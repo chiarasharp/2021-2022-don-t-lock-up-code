@@ -1,0 +1,4 @@
+input_directory= repository where you store all your files dump from OC or DOAJ
+output_directory= repository where you store all the files produced by the pipeline
+input_DOAJ_journals= the journal dump from DOAJ
+input_DOAJ_articles= the articles dump from DOAJ
