@@ -8,6 +8,10 @@ final_df_journal['subject'] = final_df_journal['subject'].apply(lambda x: [y['te
 #Getting the errors data.
 errors = pd.read_json('../../queried/final_output/errors.json')
 
+#Getting the data of the biggest journal of DOAJ
+group_journals = final_df_journal.groupby(['title'])['cited', 'citing', 'citations_to_DOAJ', 'cited_by_DOAJ'].sum()
+#PLoS ONE is the biggest journal of DOAJ in terms of the number of all types of citations.
+final_df_journal_1 = final_df_journal[final_df_journal['title'] == group_journals['citing'].idxmax()]
 #General information about number of citations and references. The open_cited and open_citing numbers are the same, as expected, since our study is about citations inside the same dataset
 print(final_df_journal[['cited', 'citing', 'cited_by_DOAJ', 'citations_to_DOAJ']].sum(axis=0))
 
@@ -74,12 +78,6 @@ most_self_cit = self_citations_df.loc[self_citations_df['title'].isin(list_journ
 most_self_cit = most_self_cit[most_self_cit.year > 1999].sort_values(['year'])
 self_citing_journals_fig = px.line(most_self_cit, x="year", y="self_citation", color="title", markers=True)
 self_citing_journals_fig.show()
-
-#Getting the data of the biggest journal of DOAJ
-group_journals = final_df_journal.groupby(['title'])['cited', 'citing', 'citations_to_DOAJ', 'cited_by_DOAJ'].sum()
-
-#PLoS ONE is the biggest journal of DOAJ in terms of the number of all types of citations.
-final_df_journal_1 = final_df_journal[final_df_journal['title'] == group_journals['citing'].idxmax()]
 
 #Plotting the comparison between the citing and cited numbers.
 comp_years_fig = px.bar(final_df_years[-20:-2], x='year', y=['cited','citing'],
