@@ -2,16 +2,17 @@ import pandas as pd
 import plotly.express as px
 
 #Getting the files to plot
-final_df_years = pd.read_json('../../queried/final_output/normal.json')
-final_df_journal = pd.read_json('../../queried/final_output/by_journal.json')
+final_df_years = pd.read_json('queried/final_output/normal.json')
+final_df_journal = pd.read_json('queried/final_output/by_journal.json')
 final_df_journal['subject'] = final_df_journal['subject'].apply(lambda x: [y['term'] for y in x])
 #Getting the errors data.
-errors = pd.read_json('../../queried/final_output/errors.json')
+errors = pd.read_json('queried/final_output/errors.json')
 
 #Getting the data of the biggest journal of DOAJ
-group_journals = final_df_journal.groupby(['title'])['cited', 'citing', 'citations_to_DOAJ', 'cited_by_DOAJ'].sum()
+group_journals = final_df_journal.groupby(['title']).agg({'dois_count':'first','subject':'first','cited':'sum', 'citing':'sum', 'self_citation':'sum','citations_to_DOAJ':'sum', 'cited_by_DOAJ':'sum'})
 #PLoS ONE is the biggest journal of DOAJ in terms of the number of all types of citations.
 final_df_journal_1 = final_df_journal[final_df_journal['title'] == group_journals['citing'].idxmax()]
+#print(final_df_journal_1.head())
 #General information about number of citations and references. The open_cited and open_citing numbers are the same, as expected, since our study is about citations inside the same dataset
 print(final_df_journal[['cited', 'citing', 'cited_by_DOAJ', 'citations_to_DOAJ']].sum(axis=0))
 
@@ -76,7 +77,7 @@ self_citations_df = final_df_journal.sort_values(["self_citation"], ascending =F
 list_journals = self_citations_df.drop_duplicates(['journal']).head(20)['title'].tolist()
 most_self_cit = self_citations_df.loc[self_citations_df['title'].isin(list_journals)]
 most_self_cit = most_self_cit[most_self_cit.year > 1999].sort_values(['year'])
-self_citing_journals_fig = px.line(most_self_cit, x="year", y="self_citation", color="title", markers=True)
+self_citing_journals_fig = px.line(most_self_cit, x="year", y="self_citation", color="title", title="Journals with most self citations",markers=True)
 self_citing_journals_fig.show()
 
 #Plotting the comparison between the citing and cited numbers.
