@@ -24,14 +24,29 @@ start-venv
 
 ### 3. Run processing steps
 
-Run the program launch the _run_ command. **If you want to run a specific command** comment out
-one or more commands script in the _run.bat_ file
+Run the program launch the _run_ command.
 
 ```bash
 run
 ```
 
-### 3. Output
+**If you want to run a specific command** comment out one or more commands script in the _run.bat_ file. Otherwise
+you can run a specific command from run directory:
+
+```bash
+cd run
+```
+
+and then run the command that you prefer:
+
+```bash
+python <command>
+```
+
+**WARNING**: running a specific command some errors might occur, due to the fact that sometimes the scripts depends on 
+each other.
+
+### 4. Output
 
 You can find the output of the running process inside the output repository specified above.
 
