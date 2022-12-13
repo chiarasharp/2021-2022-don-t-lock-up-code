@@ -1,0 +1,11 @@
+colorama==0.4.5
+-e git+https://github.com/open-sci/2021-2022-don-t-lock-up-code@71fb468d4d28c92d5880e35812d594e1abac3bcb#egg=my_project
+numpy==1.23.3
+pandas==1.5.1
+plotly==5.11.0
+python-dateutil==2.8.2
+pytz==2022.1
+PyYAML==6.0
+six==1.16.0
+tenacity==8.1.0
+tqdm==4.64.1
