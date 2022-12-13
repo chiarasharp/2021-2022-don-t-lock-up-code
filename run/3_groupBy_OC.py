@@ -63,7 +63,7 @@ if __name__ == '__main__':
             'isDOAJ_cited': str
         })
 
-        df = csv_manager.add_isDOAJ(df)
+        # df = csv_manager.add_isDOAJ(df)
 
         df = csv_manager.add_year(df, 'creation')
 
