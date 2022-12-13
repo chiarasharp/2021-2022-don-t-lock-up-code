@@ -13,16 +13,21 @@ install repo with setup.py tools, launching this command:
 ```bash
 pip install setup.py
 ```
-### 2. Run configuration
 
-Then run the _config_ command for generating the .env file, storing all the information about paths, and
-starting the Virtual Environment
+### 2. Put input repository inside project
+
+Put all the files that you need for starting the experiment inside the project root 
+
+### 3. Run configuration
+
+Then run the command for generating the .env file, storing all the information about the repositories paths
+(DOAJ_journals, DOAJ_articles, OpenCitations dump), and starting the Virtual Environment.
 
 ```bash
 start-venv
 ```
 
-### 3. Run processing steps
+### 4. Run processing steps
 
 Run the program launch the _run_ command.
 
@@ -40,13 +45,13 @@ cd run
 and then run the command that you prefer:
 
 ```bash
-python <command>
+python -m <command>
 ```
 
 **WARNING**: running a specific command some errors might occur, due to the fact that sometimes the scripts depends on 
 each other.
 
-### 4. Output
+### 5. Output
 
 You can find the output of the running process inside the output repository specified above.
 
